@@ -3,6 +3,7 @@ import './App.css';
 import TweetList from './TweetList';
 import PostTweet from './PostTweet';
 import UserProfile from './UserProfile';
+import SearchBar from './SearchBar';
 
 function App() {
   const [tweets, setTweets] = useState([]);
