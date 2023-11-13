@@ -3,11 +3,19 @@ import Tweet from './Tweet';
 
 const TweetList = ({ tweets }) => {
   const [likes, setLikes] = useState({});
+  const [replies, setReplies] = useState({});
 
   const handleLike = (tweetId) => {
     setLikes((prevLikes) => ({
       ...prevLikes,
       [tweetId]: !prevLikes[tweetId],
+    }));
+  };
+
+  const handleReply = (tweetId, replyText) => {
+    setReplies((prevReplies) => ({
+      ...prevReplies,
+      [tweetId]: [...(prevReplies[tweetId] || []), replyText],
     }));
   };
 
@@ -18,6 +26,7 @@ const TweetList = ({ tweets }) => {
           key={tweet.id}
           tweet={tweet}
           onLike={handleLike}
+          onReply={handleReply}
           liked={likes[tweet.id]}
         />
       ))}
