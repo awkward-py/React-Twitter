@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Tweet from './Tweet';
 import PostTweet from './PostTweet';
 
-const TweetList = ({ tweets }) => {
+const TweetList = ({ tweets, user }) => {
   const [likes, setLikes] = useState({});
   const [replies, setReplies] = useState({});
   const [newTweets, setNewTweets] = useState([]);
@@ -25,10 +25,23 @@ const TweetList = ({ tweets }) => {
     const newTweet = {
       id: newTweets.length + 1,
       text: tweetText,
+      user,
       likes: 0,
       replies: [],
     };
     setNewTweets((prevTweets) => [newTweet, ...prevTweets]);
+  };
+
+  const handleDelete = (tweetId) => {
+    // Implement delete functionality
+    // You can filter out the tweet with the given id
+    // and update the state accordingly
+  };
+
+  const handleEdit = (tweetId, editedText) => {
+    // Implement edit functionality
+    // You can map over the tweets, find the one with the given id,
+    // update the text, and then update the state
   };
 
   const allTweets = [...tweets, ...newTweets];
@@ -40,8 +53,11 @@ const TweetList = ({ tweets }) => {
         <Tweet
           key={tweet.id}
           tweet={tweet}
+          user={user}
           onLike={handleLike}
           onReply={handleReply}
+          onDelete={handleDelete}
+          onEdit={handleEdit}
           liked={likes[tweet.id]}
         />
       ))}
