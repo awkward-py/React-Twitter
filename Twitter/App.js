@@ -1,59 +1,26 @@
 import React, { useState } from 'react';
 import './App.css';
 import TweetList from './TweetList';
-
-function TweetForm({ addTweet }) {
-  const [tweet, setTweet] = useState('');
-
-  const handleTweetChange = (e) => {
-    setTweet(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (tweet.trim() !== '') {
-      addTweet(tweet);
-      setTweet('');
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <textarea
-        rows="4"
-        cols="50"
-        placeholder="What's happening?"
-        value={tweet}
-        onChange={handleTweetChange}
-      />
-      <br />
-      <button type="submit">Tweet</button>
-    </form>
-  );
-}
-
-function TweetList({ tweets }) {
-  return (
-    <div>
-      {tweets.map((tweet, index) => (
-        <div key={index}>{tweet}</div>
-      ))}
-    </div>
-  );
-}
+import PostTweet from './PostTweet';
+import UserProfile from './UserProfile';
 
 function App() {
   const [tweets, setTweets] = useState([]);
+  const [userName, setUserName] = useState("YourUsername");
 
   const addTweet = (tweet) => {
-    setTweets([...tweets, tweet]);
+    setTweets([...tweets, { id: tweets.length + 1, text: tweet, user: userName, likes: 0, replies: [] }]);
+  };
+
+  const handleEditProfile = (newUserName) => {
+    setUserName(newUserName);
   };
 
   return (
-    <div className="App">
-      <h1>Twitter Clone</h1>
-      <TweetForm addTweet={addTweet} />
-      <TweetList tweets={tweets} />
+    <div className="app">
+      <UserProfile userName={userName} onEditProfile={handleEditProfile} />
+      <PostTweet onPost={addTweet} />
+      <TweetList tweets={tweets} user={userName} />
     </div>
   );
 }
