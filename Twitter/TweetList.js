@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import Tweet from './Tweet';
 import PostTweet from './PostTweet';
+import SearchBar from './SearchBar';
 
 const TweetList = ({ tweets, user }) => {
   const [likes, setLikes] = useState({});
   const [replies, setReplies] = useState({});
   const [newTweets, setNewTweets] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleLike = (tweetId) => {
     setLikes((prevLikes) => ({
@@ -32,34 +34,27 @@ const TweetList = ({ tweets, user }) => {
     setNewTweets((prevTweets) => [newTweet, ...prevTweets]);
   };
 
-  const handleDelete = (tweetId) => {
-    // Implement delete functionality
-    const updatedTweets = allTweets.filter((tweet) => tweet.id !== tweetId);
-    setNewTweets(updatedTweets.slice(tweets.length));
+  const handleSearch = (query) => {
+    setSearchQuery(query);
   };
 
-  const handleEdit = (tweetId, editedText) => {
-    // Implement edit functionality
-    const updatedTweets = allTweets.map((tweet) =>
-      tweet.id === tweetId ? { ...tweet, text: editedText } : tweet
-    );
-    setNewTweets(updatedTweets.slice(tweets.length));
-  };
-
-  const allTweets = [...tweets, ...newTweets];
+  const filteredTweets = [...tweets, ...newTweets].filter(
+    (tweet) =>
+      tweet.text.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      tweet.user.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="tweet-list">
+      <SearchBar onSearch={handleSearch} />
       <PostTweet onPost={handlePostTweet} />
-      {allTweets.map((tweet) => (
+      {filteredTweets.map((tweet) => (
         <Tweet
           key={tweet.id}
           tweet={tweet}
           user={user}
           onLike={handleLike}
           onReply={handleReply}
-          onDelete={handleDelete}
-          onEdit={handleEdit}
           liked={likes[tweet.id]}
         />
       ))}
