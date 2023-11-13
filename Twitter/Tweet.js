@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 
-const Tweet = ({ tweet, onLike, onReply }) => {
+const Tweet = ({ tweet, user, onLike, onReply, onDelete, onEdit }) => {
   const [liked, setLiked] = useState(false);
   const [replying, setReplying] = useState(false);
   const [replyText, setReplyText] = useState('');
   const [taggedUsers, setTaggedUsers] = useState([]);
+  const [editing, setEditing] = useState(false);
+  const [editedText, setEditedText] = useState(tweet.text);
 
   const handleLike = () => {
     setLiked(!liked);
@@ -13,6 +15,26 @@ const Tweet = ({ tweet, onLike, onReply }) => {
 
   const handleReply = () => {
     setReplying(!replying);
+  };
+
+  const handleDelete = () => {
+    onDelete(tweet.id);
+  };
+
+  const handleEdit = () => {
+    setEditing(true);
+  };
+
+  const handleCancelEdit = () => {
+    setEditing(false);
+    setEditedText(tweet.text);
+  };
+
+  const handleSaveEdit = () => {
+    if (editedText.trim() !== '') {
+      onEdit(tweet.id, editedText);
+      setEditing(false);
+    }
   };
 
   const handleReplyTextChange = (e) => {
@@ -26,25 +48,23 @@ const Tweet = ({ tweet, onLike, onReply }) => {
     }
   };
 
-  const handleReplySubmit = (e) => {
-    e.preventDefault();
-    onReply(tweet.id, replyText, taggedUsers);
-    setReplyText('');
-    setTaggedUsers([]);
-    setReplying(false);
-  };
-
   return (
     <div className="tweet">
-      <p>{tweet.text}</p>
+      <p>{editedText}</p>
       <div>
         <button onClick={handleLike}>{liked ? 'Unlike' : 'Like'}</button>
         <span>{`Likes: ${tweet.likes}`}</span>
         <button onClick={handleReply}>Reply</button>
         <span>{`Replies: ${tweet.replies.length}`}</span>
+        {user === tweet.user && (
+          <>
+            <button onClick={handleEdit}>Edit</button>
+            <button onClick={handleDelete}>Delete</button>
+          </>
+        )}
       </div>
       {replying && (
-        <form onSubmit={handleReplySubmit}>
+        <form>
           <textarea
             value={replyText}
             onChange={handleReplyTextChange}
@@ -58,6 +78,17 @@ const Tweet = ({ tweet, onLike, onReply }) => {
           />
           <button type="submit">Submit Reply</button>
         </form>
+      )}
+      {editing && (
+        <>
+          <input
+            type="text"
+            value={editedText}
+            onChange={(e) => setEditedText(e.target.value)}
+          />
+          <button onClick={handleSaveEdit}>Save</button>
+          <button onClick={handleCancelEdit}>Cancel</button>
+        </>
       )}
     </div>
   );
