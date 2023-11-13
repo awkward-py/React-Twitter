@@ -34,14 +34,16 @@ const TweetList = ({ tweets, user }) => {
 
   const handleDelete = (tweetId) => {
     // Implement delete functionality
-    // You can filter out the tweet with the given id
-    // and update the state accordingly
+    const updatedTweets = allTweets.filter((tweet) => tweet.id !== tweetId);
+    setNewTweets(updatedTweets.slice(tweets.length));
   };
 
   const handleEdit = (tweetId, editedText) => {
     // Implement edit functionality
-    // You can map over the tweets, find the one with the given id,
-    // update the text, and then update the state
+    const updatedTweets = allTweets.map((tweet) =>
+      tweet.id === tweetId ? { ...tweet, text: editedText } : tweet
+    );
+    setNewTweets(updatedTweets.slice(tweets.length));
   };
 
   const allTweets = [...tweets, ...newTweets];
