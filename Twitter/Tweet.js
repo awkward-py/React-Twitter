@@ -4,6 +4,7 @@ const Tweet = ({ tweet, onLike, onReply }) => {
   const [liked, setLiked] = useState(false);
   const [replying, setReplying] = useState(false);
   const [replyText, setReplyText] = useState('');
+  const [taggedUsers, setTaggedUsers] = useState([]);
 
   const handleLike = () => {
     setLiked(!liked);
@@ -18,10 +19,18 @@ const Tweet = ({ tweet, onLike, onReply }) => {
     setReplyText(e.target.value);
   };
 
+  const handleTagUser = (e) => {
+    const taggedUser = e.target.value;
+    if (taggedUser.startsWith('@')) {
+      setTaggedUsers((prevTaggedUsers) => [...prevTaggedUsers, taggedUser]);
+    }
+  };
+
   const handleReplySubmit = (e) => {
     e.preventDefault();
-    onReply(tweet.id, replyText);
+    onReply(tweet.id, replyText, taggedUsers);
     setReplyText('');
+    setTaggedUsers([]);
     setReplying(false);
   };
 
@@ -36,11 +45,16 @@ const Tweet = ({ tweet, onLike, onReply }) => {
       </div>
       {replying && (
         <form onSubmit={handleReplySubmit}>
-          <input
-            type="text"
+          <textarea
             value={replyText}
             onChange={handleReplyTextChange}
             placeholder="Write your reply"
+          />
+          <input
+            type="text"
+            value={taggedUsers.join(' ')}
+            onChange={handleTagUser}
+            placeholder="Tag users with '@username'"
           />
           <button type="submit">Submit Reply</button>
         </form>
