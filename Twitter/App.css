@@ -1,22 +1,184 @@
-.App {
-  text-align: center;
-  margin: 20px;
+/* App.css */
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
 }
 
-form {
+.app {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* UserProfile.js */
+
+.user-profile {
   margin-bottom: 20px;
 }
 
-textarea {
-  width: 100%;
-  padding: 10px;
+.user-profile p {
+  font-size: 1.2em;
+  margin-bottom: 10px;
 }
 
-button {
-  padding: 10px;
+.user-profile input {
+  width: 70%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.user-profile button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
   cursor: pointer;
 }
 
-div {
+.user-profile button:hover {
+  background-color: #45a049;
+}
+
+/* Messages.js */
+
+.messages {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.message-list {
+  max-height: 200px;
+  overflow-y: auto;
   margin-bottom: 10px;
+}
+
+.message {
+  margin-bottom: 10px;
+}
+
+.message span {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.message-input textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.message-input button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.message-input button:hover {
+  background-color: #45a049;
+}
+
+/* Notifications.js */
+
+.notifications {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* PostTweet.js */
+
+.post-tweet textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.post-tweet button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.post-tweet button:hover {
+  background-color: #45a049;
+}
+
+/* SearchBar.js */
+
+.search-bar input {
+  width: 80%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.search-bar button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.search-bar button:hover {
+  background-color: #45a049;
+}
+
+/* Tweet.js */
+
+.tweet {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.tweet button {
+  margin-right: 10px;
+}
+
+.replies {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+/* TweetList.js */
+
+.tweet-list {
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
+
+/* UserProfile.js */
+
+.user-profile input {
+  width: 70%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.user-profile button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.user-profile button:hover {
+  background-color: #45a049;
 }
