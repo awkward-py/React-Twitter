@@ -8,6 +8,7 @@ import SearchBar from './SearchBar';
 function App() {
   const [tweets, setTweets] = useState([]);
   const [userName, setUserName] = useState("YourUsername");
+  const [isVerified, setIsVerified] = useState(true); // Set to true for a verified account
 
   const addTweet = (tweet) => {
     setTweets([...tweets, { id: tweets.length + 1, text: tweet, user: userName, likes: 0, replies: [] }]);
@@ -19,7 +20,7 @@ function App() {
 
   return (
     <div className="app">
-      <UserProfile userName={userName} onEditProfile={handleEditProfile} />
+      <UserProfile userName={userName} onEditProfile={handleEditProfile} verified={isVerified} />
       <PostTweet onPost={addTweet} />
       <TweetList tweets={tweets} user={userName} />
     </div>
