@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const UserProfile = ({ userName, onEditProfile }) => {
+const UserProfile = ({ userName, onEditProfile, verified }) => {
   const [newUserName, setNewUserName] = useState(userName);
   const [editing, setEditing] = useState(false);
 
@@ -34,7 +34,7 @@ const UserProfile = ({ userName, onEditProfile }) => {
         </>
       ) : (
         <>
-          <p>{userName}</p>
+          <p>{userName} {verified && <span>✔️</span>}</p>
           <button onClick={handleEditClick}>Edit Profile</button>
         </>
       )}
