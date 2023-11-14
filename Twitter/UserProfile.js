@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PrivacyPolicy from './PrivacyPolicy';
 
 const UserProfile = ({ userName, onEditProfile, verified }) => {
   const [newUserName, setNewUserName] = useState(userName);
@@ -35,6 +36,7 @@ const UserProfile = ({ userName, onEditProfile, verified }) => {
       ) : (
         <>
           <p>{userName} {verified && <span>✔️</span>}</p>
+          <PrivacyPolicy />
           <button onClick={handleEditClick}>Edit Profile</button>
         </>
       )}
