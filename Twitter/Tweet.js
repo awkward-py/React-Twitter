@@ -48,6 +48,15 @@ const Tweet = ({ tweet, user, onLike, onReply, onDelete, onEdit }) => {
     }
   };
 
+  const handleReplySubmit = () => {
+    if (replyText.trim() !== '') {
+      onReply(tweet.id, replyText, taggedUsers);
+      setReplyText('');
+      setTaggedUsers([]);
+      setReplying(false);
+    }
+  };
+
   return (
     <div className="tweet">
       <p>{editedText}</p>
@@ -64,7 +73,7 @@ const Tweet = ({ tweet, user, onLike, onReply, onDelete, onEdit }) => {
         )}
       </div>
       {replying && (
-        <form>
+        <form onSubmit={handleReplySubmit}>
           <textarea
             value={replyText}
             onChange={handleReplyTextChange}
@@ -89,6 +98,17 @@ const Tweet = ({ tweet, user, onLike, onReply, onDelete, onEdit }) => {
           <button onClick={handleSaveEdit}>Save</button>
           <button onClick={handleCancelEdit}>Cancel</button>
         </>
+      )}
+      {tweet.replies.length > 0 && (
+        <div className="replies">
+          <strong>Replies:</strong>
+          {tweet.replies.map((reply, index) => (
+            <div key={index}>
+              <p>{reply.text}</p>
+              <span>{`Tagged Users: ${reply.taggedUsers.join(', ')}`}</span>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );
