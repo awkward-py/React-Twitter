@@ -7,12 +7,27 @@ import SearchBar from './SearchBar';
 import Notifications from './Notifications';
 import Messages from './Messages';
 
+
 function App() {
   const [tweets, setTweets] = useState([]);
   const [userName, setUserName] = useState("YourUsername");
   const [isVerified, setIsVerified] = useState(true);
   const [notifications, setNotifications] = useState([]);
   const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate data fetching or any asynchronous operations
+    setTimeout(() => {
+      setTweets([
+        { id: 1, text: 'Hello Twitter!', user: 'User1', likes: 10, replies: [] },
+        { id: 2, text: 'Learning React!', user: 'User2', likes: 5, replies: [] },
+        // Add more tweets as needed
+      ]);
+      setLoading(false);
+    }, 2000);
+  }, []); // Empty dependency array to run the effect only once on mount
+
 
   const addTweet = (tweet) => {
     setTweets([...tweets, { id: tweets.length + 1, text: tweet, user: userName, likes: 0, replies: [] }]);
