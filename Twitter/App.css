@@ -182,3 +182,15 @@ body {
 .user-profile button:hover {
   background-color: #45a049;
 }
+
+/* Dark Mode */
+
+.dark-mode {
+  --background-color: #333;
+  --text-color: #fff;
+  --app-background: #444;
+  --border-color: #555;
+  --button-bg: #555;
+  --button-text: #fff;
+  --button-hover-bg: #666;
+}
